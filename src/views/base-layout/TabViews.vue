@@ -1,18 +1,31 @@
 <template>
-  <div class="row wrapper border-bottom white-bg page-heading">
+  <div class="row wrapper white-bg page-heading">
     <div class="col-lg-10">
-      <h2>Data Tables</h2>
       <ol class="breadcrumb">
         <li>
-          <a href="index.html">Home</a>
-        </li>
-        <li>
-          <a>Tables</a>
+          <a href="#">{{firstTitle}}</a>
         </li>
         <li class="active">
-          <strong>Data Tables</strong>
+          <strong>{{secondTitle}}</strong>
         </li>
       </ol>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      firstTitle: '',
+      secondTitle: ''
+    }
+  },
+  watch: {
+    $route(val) {
+      console.log(val)
+      this.firstTitle = val.matched[0].meta.title
+      this.secondTitle = val.meta.title
+    }
+  }
+}
+</script>
