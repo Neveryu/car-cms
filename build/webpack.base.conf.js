@@ -37,6 +37,9 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  externals: {
+    'jquery': 'jQuery'
+  },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),

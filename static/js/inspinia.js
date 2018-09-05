@@ -144,8 +144,7 @@ $(document).ready(function () {
         }
     });
 
-    $("[data-toggle=popover]")
-        .popover();
+    $("[data-toggle=popover]").popover();
 
     // Add slimscroll to element
     $('.full-height-scroll').slimscroll({
