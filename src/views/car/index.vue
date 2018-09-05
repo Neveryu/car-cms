@@ -1,135 +1,55 @@
 <template>
   <div class="row">
     <div class="col-lg-12">
-      <table class="table table-hover" >
+      <div class="ibox">
+        <div class="ibox-content">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th>Rendering engine</th>
-            <th>Browser</th>
-            <th>Platform(s)</th>
-            <th>Engine version</th>
-            <th>CSS grade</th>
+            <th>车辆ID</th>
+            <th>手机号</th>
+            <th>车牌号</th>
+            <th>发动机号</th>
+            <th>车辆VIN号</th>
+            <th>品牌型号</th>
+            <th>是否认证</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="gradeX">
-            <td>Trident</td>
-            <td>Internet
-              Explorer 4.0
-            </td>
+          <tr>
+            <td>0001</td>
+            <td>13888888888</td>
             <td>Win 95+</td>
-            <td class="center">4</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Trident</td>
-            <td>Internet
-              Explorer 5.0
-            </td>
-            <td>Win 95+</td>
-            <td class="center">5</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet
-              Explorer 5.5
-            </td>
-            <td>Win 95+</td>
-            <td class="center">5.5</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet
-              Explorer 6
-            </td>
-            <td>Win 98+</td>
-            <td class="center">6</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet Explorer 7</td>
-            <td>Win XP SP2+</td>
-            <td class="center">7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Trident</td>
-            <td>AOL browser (AOL desktop)</td>
-            <td>Win XP</td>
-            <td class="center">6</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.5</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Misc</td>
-            <td>Dillo 0.8</td>
-            <td>Embedded devices</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Misc</td>
-            <td>Links</td>
-            <td>Text only</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Misc</td>
-            <td>Lynx</td>
-            <td>Text only</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Misc</td>
-            <td>IE Mobile</td>
-            <td>Windows Mobile 6</td>
-            <td class="center">-</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Misc</td>
-            <td>PSP browser</td>
-            <td>PSP</td>
-            <td class="center">-</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeU">
-            <td>Other browsers</td>
-            <td>All others</td>
-            <td>-</td>
-            <td class="center">-</td>
-            <td class="center">U</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>X</td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            <th>Rendering engine</th>
-            <th>Browser</th>
-            <th>Platform(s)</th>
-            <th>Engine version</th>
-            <th>CSS grade</th>
-          </tr>
-        </tfoot>
+        <tfoot></tfoot>
       </table>
-
+      </div>
+      </div>
     </div>
   </div>
 </template>
+
+<script>
+import { getCarList } from '@/api/car'
+export default {
+  data() {
+    return {
+      carList: []
+    }
+  },
+  created() {
+    console.log(getCarList())
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

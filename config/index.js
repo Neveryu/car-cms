@@ -10,7 +10,17 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/': {
+            target: 'https://www.easy-mock.com/mock/5b8fb17106b4621da8247b26',
+            // target: 'http://dev-app.palmsave.ng',
+            secure: false,
+            changeOrigin: true,
+            pathRewrite: {
+              '^/': ''
+            }
+        }
+    },
 
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
