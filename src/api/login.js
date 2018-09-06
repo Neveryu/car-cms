@@ -1,17 +1,17 @@
 import $ from 'jquery'
 
 /**
- * 获取车辆信息列表
+ * Login
  * @return {[type]} [description]
  */
-function getCarList(index, count) {
+function login({ email, pwd }) {
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: '/getcarList',
-      type: 'get',
+      url: '/login',
+      type: 'post',
       data: {
-        index,
-        count
+        account: email,
+        password: pwd
       },
       success: function(data) {
         resolve(data)
@@ -23,4 +23,4 @@ function getCarList(index, count) {
   })
 }
 
-export { getCarList }
+export { login }
