@@ -53,11 +53,13 @@ export default {
       rules: {
         email: [
           { required: true, message: '请输入账号', trigger: 'blur' },
-          { required: true, trigger: 'blur', validator: validateAccount }
+          { required: true, trigger: 'blur', validator: validateAccount },
+          { required: true, trigger: 'change', validator: validateAccount }
         ],
         pwd: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { required: true, trigger: 'blur', validator: validatePwd }
+          { required: true, trigger: 'blur', validator: validatePwd },
+          { required: true, trigger: 'change', validator: validatePwd }
         ]    
       }
     }

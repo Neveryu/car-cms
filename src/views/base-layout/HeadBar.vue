@@ -6,7 +6,7 @@
       </div>
       <ul class="nav navbar-top-links navbar-right">
         <li>
-          <a href="#">
+          <a href="javascript:;" @click="handerLogout" v-loading.fullscreen.lock="fullscreenLoading">
             <i class="fa fa-sign-out"></i> Log out
           </a>
         </li>
@@ -14,3 +14,23 @@
     </nav>
   </div>
 </template>
+<script>
+import { logout } from '@/api/login'
+export default {
+  data() {
+    return {
+      fullscreenLoading: false
+    }
+  },
+  methods: {
+    handerLogout() {
+      this.fullscreenLoading = true
+      logout().then(resp => {
+        if(resp.code === 0) {
+          this.$router.push({ name: 'login' })
+        }
+      })
+    }
+  }
+}
+</script>

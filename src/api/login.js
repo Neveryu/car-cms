@@ -23,4 +23,22 @@ function login({ email, pwd }) {
   })
 }
 
-export { login }
+function logout(uid) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: '/logout',
+      type: 'post',
+      data: {
+        uid
+      },
+      success: function(data) {
+        resolve(data)
+      },
+      error: function(data) {
+        reject(data)
+      }
+    })
+  })
+}
+
+export { login, logout }
