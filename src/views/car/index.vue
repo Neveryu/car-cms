@@ -169,6 +169,9 @@ export default {
       this.loading = false
       this.carList = resp.data
       this.totalPage = resp.totalPage
+    }).catch((err) => {
+      this.loading = false
+      console.log('获取车辆列表错误：' + err)
     })
   }
 }
