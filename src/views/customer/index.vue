@@ -27,33 +27,43 @@
       style="width: 100%">
       <el-table-column
         prop="id"
-        label="车辆ID"
+        label="客户ID"
         width="80">
       </el-table-column>
       <el-table-column
-        prop="phone"
-        label="手机号"
+        prop="name"
+        label="姓名"
         width="160">
+      </el-table-column>
+      <el-table-column
+        prop="sex"
+        label="性别">
+      </el-table-column>
+      <el-table-column
+        prop="phone"
+        label="手机号">
       </el-table-column>
       <el-table-column
         prop="carNum"
         label="车牌号">
       </el-table-column>
       <el-table-column
-        prop="driverNum"
-        label="发动机号">
+        prop="registDate"
+        label="注册日期">
       </el-table-column>
       <el-table-column
-        prop="VIN"
-        label="车辆VIN号">
-      </el-table-column>
-      <el-table-column
-        prop="brand"
-        label="品牌型号">
+        prop="countID"
+        label="账户ID">
       </el-table-column>
       <el-table-column
         prop="request"
         label="是否认证">
+        <template slot-scope="scope">
+          <el-tag
+          :type="scope.row.request === 1 ? 'success' : 'default'">
+            {{scope.row.request === 1 ? '已认证' : '未认证'}}
+          </el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         prop="address"
