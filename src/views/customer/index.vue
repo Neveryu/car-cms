@@ -1,21 +1,30 @@
 <template>
   <div class="row">
     <div class="tool-bar">
-      <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" style="text-align: right; padding-right: 30px;">
-        <el-form-item label="车牌号">
+      <div class="date-wrapper">
+        <el-date-picker
+          v-model="searchDate"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期">
+        </el-date-picker>
+      </div>
+      <el-form ref="searchForm" :inline="true" :model="searchForm" label-width="80px" style="text-align: right; padding-right: 30px;">
+        <el-form-item label="车牌号" prop="carNum1">
           <el-select v-model="searchForm.carNum1" placeholder="">
             <el-option label="京A" value="a"></el-option>
             <el-option label="京B" value="b"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="">
+        <el-form-item label="" prop="carNum2">
           <el-input v-model="searchForm.carNum2"></el-input>
         </el-form-item>
             <el-form-item>
         <el-button type="primary" plain @click="query">查询</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="info" plain @click="reset">重置</el-button>
+        <el-button type="info" plain @click="reset('searchForm')">重置</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -26,36 +35,47 @@
       current-row-key
       style="width: 100%">
       <el-table-column
+        align="center"
         prop="id"
         label="客户ID"
         width="80">
       </el-table-column>
       <el-table-column
+        align="center"
         prop="name"
         label="姓名"
         width="160">
       </el-table-column>
       <el-table-column
+        align="center"
         prop="sex"
         label="性别">
+        <template slot-scope="scope">
+          {{scope.row.sex === 1 ? '男' : '女'}}
+        </template>
       </el-table-column>
       <el-table-column
+        align="center"
         prop="phone"
         label="手机号">
       </el-table-column>
       <el-table-column
+        align="center"
         prop="carNum"
         label="车牌号">
       </el-table-column>
       <el-table-column
+        align="center"
         prop="registDate"
         label="注册日期">
       </el-table-column>
       <el-table-column
-        prop="countID"
+        align="center"
+        prop="accountId"
         label="账户ID">
       </el-table-column>
       <el-table-column
+        align="center"
         prop="request"
         label="是否认证">
         <template slot-scope="scope">
@@ -93,7 +113,7 @@
   </div>
 </template>
 <script>
-import { getCarList } from '@/api/car'
+import { getCustomerList } from '@/api/customer'
 export default {
   data() {
     return {
@@ -107,6 +127,7 @@ export default {
       // 当前第几页
       currentIndex: 1,
       // 搜索
+      searchDate: '',
       searchForm: {
         carNum1: '京A',
         carNum2: ''
@@ -114,13 +135,25 @@ export default {
     }
   },
   methods: {
-    query() {},
-    reset() {},
+    query() {
+      this.loading = true
+      getCustomerList(this.currentIndex, this.perNum).then(resp => {
+        this.loading = false
+        this.carList = resp.data
+        this.totalPage = resp.totalPage
+      }).catch((err) => {
+        this.loading = false
+        console.log('获取车辆列表错误：' + err)
+      })
+    },
+    reset(formName) {
+      this.$refs[formName].resetFields()
+    },
     handleSizeChange(pageSize) {
       this.loading = true
       this.currentIndex = 1
       this.perNum = pageSize
-      getCarList(this.currentIndex, this.perNum).then(resp => {
+      getCustomerList(this.currentIndex, this.perNum).then(resp => {
         this.loading = false
         this.carList = resp.data
         this.totalPage = resp.totalPage
@@ -145,12 +178,7 @@ export default {
       }).then(() => {
         this.$message({
           type: 'success',
-          message: '删除成功!'
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
+          message: '解除绑定成功!'
         })
       })
     },
@@ -165,16 +193,11 @@ export default {
           type: 'success',
           message: '删除成功!'
         })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
       })
     }
   },
   created() {
-    getCarList(this.currentIndex, this.perNum).then(resp => {
+    getCustomerList(this.currentIndex, this.perNum).then(resp => {
       this.loading = false
       this.carList = resp.data
       this.totalPage = resp.totalPage
@@ -203,5 +226,10 @@ export default {
   }
   .el-form--inline .el-form-item {
     margin-right: 0;
+  }
+  .date-wrapper {
+    text-align: right;
+    margin-top: -35px;
+    padding: 0 20px 10px 0;
   }
 </style>

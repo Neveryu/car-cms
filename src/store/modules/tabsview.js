@@ -7,7 +7,6 @@ const tabsview = {
   },
   mutations: {
     [SET_TABSVIEW](state, view) {
-      console.log(view)
       if (state.visitedTabsView.find((n) => n.path === view.path)) {
         return
       }

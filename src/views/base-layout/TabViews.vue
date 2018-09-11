@@ -32,15 +32,21 @@ export default {
  -->
 
 <template>
-  <div class="tabs-container">
-    <router-link class="tags-view-item" :class="isActive(tag) ? 'active' : '' " v-for="(tag, index) in visitedTabsView" :to="tag.path" :key="index">
-      <el-tag
-        closable
-        :disable-transitions="false"
-        @close.prevent.stop="handleClose(tag)">
-        {{tag.name}}
-      </el-tag>
-    </router-link>
+  <div>
+    <div class="tabs-container">
+      <router-link class="tags-view-item" :class="isActive(tag) ? 'active' : '' " v-for="(tag, index) in visitedTabsView" :to="tag.path" :key="index">
+        <el-tag
+          closable
+          :disable-transitions="false"
+          @close.prevent.stop="handleClose(tag)">
+          {{tag.name}}
+        </el-tag>
+      </router-link>
+    </div>
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item>{{firstTitle}}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{secondTitle}}</el-breadcrumb-item>
+    </el-breadcrumb>
   </div>
 </template>
 
@@ -48,10 +54,15 @@ export default {
 import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      firstTitle: '',
+      secondTitle: ''
+    }
   },
   created() {
     this.addTabsView()
+    this.firstTitle = this.$route.matched[0].meta.title
+    this.secondTitle = this.$route.meta.title
   },
   computed: {
     ...mapGetters([
@@ -95,8 +106,10 @@ export default {
     }
   },
   watch: {
-    $route() {
+    $route(val) {
       this.addTabsView()
+      this.firstTitle = val.matched[0].meta.title
+      this.secondTitle = val.meta.title
     }
   }
 }
@@ -134,5 +147,8 @@ export default {
         }
       }
     }
+  }
+  .el-breadcrumb {
+    padding: 10px 0;
   }
 </style>
