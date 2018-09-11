@@ -51,11 +51,8 @@
         </li>
         <li>
           <router-link to="/error">
-            <i class="fa fa-edit"></i> <span class="nav-label">报错信息</span><span class="label label-info pull-right">62</span>
+            <i class="fa fa-edit"></i> <span class="nav-label">报错信息</span>
           </router-link>
-        </li>
-        <li class="special_link">
-          <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
         </li>
       </ul>
     </div>
